@@ -1,0 +1,4 @@
+#!/bin/sh
+cd `dirname $0`
+../src/dockernet -n .:../src $*
+# for shared lib, use: opp_run -l ../src/dockernet -n .:../src $*
