@@ -26,7 +26,7 @@ module CpuModule
     parameters:
         int cpuNumbers = default(2);
         //    int vmNo=default(2);
-        @display("bgb=477,393");
+        @display("i=device/cpu, bgb=477,393");
     gates:
         input fromOS[];		// Input gates from Operating System
         output toOS[];		// Output gates to Operating System

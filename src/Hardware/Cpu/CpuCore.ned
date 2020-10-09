@@ -24,14 +24,15 @@ import org.omnetpp.queueing.Queue;
 module CpuCore
 {
     parameters:
-        volatile double speed; //in MIPS (Million Instructions per Second)
+        volatile double speed=default(2000); //in MIPS (Million Instructions per Second)
     gates:
         input in;
         output out;
     submodules:
         queue: Queue {
             @display("p=116,123");
-            serviceTime = 0.0002s; // each queue item eauals 1 Million instructions.  
+            serviceTime = 0.0005s; // each queue item eauals 1 Million instructions.  
+           
         }
     connections:
         in --> queue.in++;

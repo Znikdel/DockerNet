@@ -15,6 +15,7 @@
 
 package dockernet.Virtualization.VirtualMachines;
 
+import dockernet.Applications.TcpINETApp;
 import dockernet.OperatingSystem.OsBase;
 import dockernet.Virtualization.Containers.ContainersManager.DockerEngine;
 import inet.applications.contract.IApp;
@@ -22,6 +23,7 @@ import inet.applications.contract.IApp;
 module VM
 {
     int numApps = default(1);
+    int numCpus = default(1);
     gates:
         output toCpu;
         output toMemoryRead;
@@ -36,25 +38,33 @@ module VM
         input socketInApp[];
         output socketOutApp[];
 
-		input socketInDocker[];
+        input socketInDocker[];
         output socketOutDocker[];
-		
+
     submodules:
         os: OsBase {
             @display("p=97,97");
         }
-        app[numApps]: <> like IApp {
-            parameters:
-                @display("p=300,49,row,150");
-        }
+      
         dockerEngine: DockerEngine {
             @display("p=300,127");
+        }
+        app[numApps]: TcpINETApp {
+            @display("p=267,39");
         }
     connections:
 
         for i=0..numApps-1 {
-            app[i].socketOut --> os.socketInfromApp++;
-            os.socketOuttoApp++ --> app[i].socketIn;
+            app[i].socketOutToHypervisor --> os.socketInfromApp++;
+            os.socketOuttoApp++ --> app[i].socketInFromHypervisor;
+            os.toAppCpu[i] --> app[i].fromCpu;
+            os.toAppMem[i] --> app[i].fromMemory;
+            os.toAppStorage[i] --> app[i].fromStorage;
+            os.fromAppCpu[i] <-- app[i].toCpu;
+            os.fromAppMemRead[i] <-- app[i].toMemoryRead;
+            os.fromAppMemWrite[i] <-- app[i].toMemoryWrite;
+            os.fromAppStorageRead[i] <-- app[i].toStorageRead;
+            os.fromAppStorageWrite[i] <-- app[i].toStorageWrite; 
         }
 
         os.toCpu --> toCpu;

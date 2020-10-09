@@ -29,11 +29,12 @@ import inet.common.MessageDispatcher;
 
 module NodeBase extends TransportLayerNodeBase
 {
-    @display("bgb=1075,696");
+    @display("i=abstract/server, bgb=1075,696");
     int numApps = default(0);
     @figure[applicationLayer](type=rectangle; pos=250,6; size=1000,130; lineColor=#808080; cornerRadius=5; fillColor=#ffff00; fillOpacity=0.1);
     @figure[applicationLayer.title](type=text; pos=1245,11; anchor=ne; text="application layer");
-    // int VMno=default(2);
+    int VMno=default(2);
+    numEthInterfaces=1;
     submodules:
         hypervisor: HypervisorBase {
             @display("p=401,28");
@@ -79,10 +80,11 @@ module NodeBase extends TransportLayerNodeBase
 
         at.out++ --> tn.in++;
         at.in++ <-- tn.out++;
-        
-        hypervisor.socketOutApp++ --> at.in++;
-        at.out++ --> hypervisor.socketInApp++;
-        
-        hypervisor.socketOutDocker++ --> at.in++;
-        at.out++ --> hypervisor.socketInDocker++;
+		for i=0..VMno-1{
+       		hypervisor.socketOutApp++ --> at.in++;
+        	at.out++ --> hypervisor.socketInApp++;
+		
+        	hypervisor.socketOutDocker++ --> at.in++;
+        	at.out++ --> hypervisor.socketInDocker++;
+		}
 }

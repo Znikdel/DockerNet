@@ -1,33 +1,25 @@
 [Inspector-0]
-classname=VM
+classname=NodeBase
 fullscreen=false
-geom=@Rect(278 180 512 499)
-id=@Variant(\0\0\0\x81\0\0\0\0\0\0\0\x32)
-object=Test.client.hypervisor.vm[0]
+geom=@Rect(332 218 801 398)
+id=@Variant(\0\0\0\x81\0\0\0\0\0\0\0 )
+object=Test.rack.blade[0].node[0]
 type=2
 
 [Inspector-1]
-classname=DockerEngine
+classname=Tcp
 fullscreen=false
-geom=@Rect(560 655 575 500)
-id="@Variant(\0\0\0\x81\0\0\0\0\0\0\0=)"
-object=Test.client.hypervisor.vm[0].dockerEngine
+geom=@Rect(1361 269 559 583)
+id=@Variant(\0\0\0\x81\0\0\0\0\0\0\0T)
+object=Test.rack.blade[0].node[0].tcp
 type=2
 
 [Inspector-2]
-classname=NodeBase
+classname=HypervisorBase
 fullscreen=false
-geom=@Rect(1209 275 600 500)
-id=@Variant(\0\0\0\x81\0\0\0\0\0\0\0\x3)
-object=Test.server
-type=2
-
-[Inspector-3]
-classname=VM
-fullscreen=false
-geom=@Rect(1265 685 512 499)
-id=@Variant(\0\0\0\x81\0\0\0\0\0\0\0\x7f)
-object=Test.server.hypervisor.vm[0]
+geom=@Rect(1147 329 512 499)
+id=@Variant(\0\0\0\x81\0\0\0\0\0\0\0V)
+object=Test.rack.blade[0].node[0].hypervisor
 type=2
 
 [RunModeProfiles]
@@ -40,4 +32,4 @@ run-max-animation-speed=nan
 run-max-playback-speed=100
 run-min-animation-speed=nan
 run-min-playback-speed=0.01
-run-playback-speed=2.041737944669529
+run-playback-speed=64.56542290346556

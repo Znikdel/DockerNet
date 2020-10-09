@@ -32,7 +32,7 @@ module RAM
         double dataTransferRate = default(17);  //  GB/s
     //   int numDRAMChips;										// Number of DRAM chips in the same module
      //   int numModules;											// Number of connected slots in the node
-     //   @display("i=device/memory");
+        @display("i=device/memory");
 	   // int vmNo=default(2);
     gates:
         input inRead[];

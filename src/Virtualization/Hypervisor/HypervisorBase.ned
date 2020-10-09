@@ -84,10 +84,10 @@ module HypervisorBase
             cpuResponseScheduler.out++ --> vm[i].fromCpu;
             storageResponseScheduler.out++ --> vm[i].fromStorage;
             memResponseScheduler.out++ --> vm[i].fromMemory;
-            socketInApp++ --> vm[i].socketInApp++;
-            vm[i].socketOutApp++ --> socketOutApp++;
-            socketInDocker++ --> vm[i].socketInDocker++;
-            vm[i].socketOutDocker++ --> socketOutDocker++;
+            socketInApp[i] --> vm[i].socketInApp++;
+            vm[i].socketOutApp++ --> socketOutApp[i];
+            socketInDocker[i] --> vm[i].socketInDocker++;
+            vm[i].socketOutDocker++ --> socketOutDocker[i];
         }
         storageReadScheduler.out --> toStorageRead;
         storageWriteScheduler.out --> toStorageWrite;

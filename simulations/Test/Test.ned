@@ -20,6 +20,7 @@ import dockernet.Hardware.Memory.RAM;
 import dockernet.Hardware.Storage.MainStorage;
 import dockernet.OperatingSystem.OsBase;
 import dockernet.PhysicalHosts.Node.NodeBase;
+import dockernet.PhysicalHosts.Rack.Rack;
 import dockernet.Virtualization.Hypervisor.HypervisorBase;
 import inet.networklayer.configurator.ipv4.Ipv4FlatNetworkConfigurator;
 import inet.networklayer.configurator.ipv4.Ipv4NetworkConfigurator;
@@ -34,24 +35,39 @@ import inet.visualizer.linklayer.DataLinkCanvasVisualizer;
 //
 network Test
 {
-    @display("bgb=515,306");
+    @display("bgb=534,306");
+    int numBlades = default(2);
     submodules:
-        client: NodeBase {
-            @display("p=158,109");
-        }
-        server: NodeBase {
-            @display("p=368,117");
-        }
-        router: Router {
-            @display("p=254,166");
-        }
+   //     client: NodeBase {
+   //         @display("p=152,43");
+   //     }
+ //      server: NodeBase {
+ //           @display("p=376,43");
+ //       }
+ //       router: Router {
+//           @display("p=256,43");
+//        }
         configurator: Ipv4NetworkConfigurator {
-            @display("p=339,227");
+            @display("p=295,236");
         }
         visualizer: IntegratedCanvasVisualizer {
-            @display("p=238,226");
+            @display("p=217,236");
+        }
+        rack: Rack {
+            @display("p=152,132");
+        }
+        rack1: Rack {
+            @display("p=376,132");
+        }
+        router1: Router {
+            @display("p=256,133");
         }
     connections:
-        server.ethg++ <--> Eth100M <--> router.ethg++;
-        client.ethg++ <--> Eth100M <--> router.ethg++;
+  //      server.ethg++ <--> Eth100M <--> router.ethg++;
+  //      client.ethg++ <--> Eth100M <--> router.ethg++;
+        for i=0..numBlades-1 {
+            router1.ethg++ <--> rack1.ethg++;
+            router1.ethg++ <--> rack.ethg++;
+        }
+
 }

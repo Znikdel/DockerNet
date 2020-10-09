@@ -31,7 +31,7 @@ module MainStorage
         double dataTransferRate = default(500);  //  MB/s
         //int numDRAMChips;										// Number of DRAM chips in the same module
        // int numModules;											// Number of connected slots in the node
-   //     @display("i=device/memory");
+        @display("i=device/drive");
 	//	int vmNo=default(2);
     gates:
         input inRead[];
